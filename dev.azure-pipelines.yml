@@ -25,7 +25,7 @@ stages:
             backendServiceArm: 'SP1-aks'
             backendAzureRmOverrideSubscriptionID: '68091150-801e-4498-8be2-e5d4bcf9919c'
             backendAzureRmResourceGroupName: 'imigrant-help'
-            backendAzureRmStorageAccountName: 'jagseerstg12'
+            backendAzureRmStorageAccountName: 'jagseerstg123'
             backendAzureRmContainerName: 'containertf-aks'
             backendAzureRmKey: 'aks.terraforms.tfstate'
 
