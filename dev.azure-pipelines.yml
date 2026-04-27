@@ -21,7 +21,7 @@ stages:
           inputs:
             provider: 'azurerm'
             command: 'init'
-            workingDirectory: '$(System.DefaultWorkingDirectory)/Enviornmenrs/Dev'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/Enviornments/Dev'
             backendServiceArm: 'SP1-aks'
             backendAzureRmOverrideSubscriptionID: '68091150-801e-4498-8be2-e5d4bcf9919c'
             backendAzureRmResourceGroupName: 'imigrant-help'
@@ -33,7 +33,21 @@ stages:
           inputs:
             provider: 'azurerm'
             command: 'plan'
-            workingDirectory: '$(System.DefaultWorkingDirectory)/Enviornmenrs/Dev'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/Enviornments/Dev'
+            environmentServiceNameAzureRM: 'SP1-aks'
+        
+        - task: TerraformTask@5
+          inputs:
+            provider: 'azurerm'
+            command: 'custom'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/Enviornments/Dev'
+            outputTo: 'console'
+            customCommand: 'fmt'
             environmentServiceNameAzureRM: 'SP1-aks'
 
+
+        - task: tfsec@1
+          inputs:
+            version: 'v1.26.0'
+            dir: '$(System.DefaultWorkingDirectory)/Enviornments/Dev'
         
