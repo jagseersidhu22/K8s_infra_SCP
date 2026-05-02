@@ -12,7 +12,7 @@ module "rg" {
 }
 
 
-##########  VNET  ##########
+##########  VNET  #############
 
 module "vnet" {
     source = "../../Modules/virtual_network_"
