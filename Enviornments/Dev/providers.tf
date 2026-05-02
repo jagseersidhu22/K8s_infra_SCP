@@ -6,12 +6,7 @@ terraform {
     }
   }
 
-  backend "azurerm" {
-    resource_group_name  = "imigrant-help"
-    storage_account_name = "jagseerstg123"
-    container_name       = "containertf-aks"
-    key                  = "aks.terraforms.tfstate"
-  }
+  backend "azurerm" { }
 }
 
 
