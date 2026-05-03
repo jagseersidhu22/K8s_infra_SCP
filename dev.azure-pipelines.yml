@@ -27,7 +27,7 @@ stages:
             backendAzureRmResourceGroupName: 'imigrant-help'
             backendAzureRmStorageAccountName: 'jagseerstg123'
             backendAzureRmContainerName: 'containertf-aks'
-            backendAzureRmKey: 'aks.terraformss.tfstate'
+            backendAzureRmKey: 'aks.terraformsss.tfstate'
 
         - task: TerraformTask@5
           inputs:
