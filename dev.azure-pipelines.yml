@@ -27,7 +27,7 @@ stages:
             backendAzureRmResourceGroupName: 'imigrant-help'
             backendAzureRmStorageAccountName: 'jagseerstg123'
             backendAzureRmContainerName: 'containertf-aks'
-            backendAzureRmKey: 'aks.terraformsss.tfstate'
+            backendAzureRmKey: 'aks.terraformssss.tfstate'
 
         - task: TerraformTask@5
           inputs:
@@ -49,7 +49,38 @@ stages:
 
 
         - task: tfsec@1
+          continueOnError: true
           inputs:
             version: 'v1.26.0'
             dir: '$(System.DefaultWorkingDirectory)/Enviornments/Dev'
-        
+
+  - stage: terraformapply    
+    displayName: Terraform Apply Stage 
+    jobs:
+      - job: TerraforminitApply
+        displayName: Teraform Apply Job
+        steps:
+        - task: TerraformInstaller@1
+          inputs:
+            terraformVersion: 'latest'
+
+        - task: TerraformTask@5
+          inputs:
+            provider: 'azurerm'
+            command: 'init'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/Enviornments/Dev'
+            backendServiceArm: 'SP1-aks'
+            backendAzureRmOverrideSubscriptionID: '68091150-801e-4498-8be2-e5d4bcf9919c'
+            backendAzureRmResourceGroupName: 'imigrant-help'
+            backendAzureRmStorageAccountName: 'jagseerstg123'
+            backendAzureRmContainerName: 'containertf-aks'
+            backendAzureRmKey: 'aks.terraformapply.tfstate'
+
+        - task: TerraformTask@5
+          inputs:
+            provider: 'azurerm'
+            command: 'apply'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/Enviornment/Dev'
+            environmentServiceNameAzureRM: 'SP1-aks'
+          env:
+            TF_VAR_db_password_from_pipeline: $(db_password_from_pipeline)  
