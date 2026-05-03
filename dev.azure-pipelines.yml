@@ -35,7 +35,9 @@ stages:
             command: 'plan'
             workingDirectory: '$(System.DefaultWorkingDirectory)/Enviornments/Dev'
             environmentServiceNameAzureRM: 'SP1-aks'
-        
+          env:
+            TF_VAR_db_password_from_pipeline: $(db_password_from_pipeline)
+
         - task: TerraformTask@5
           inputs:
             provider: 'azurerm'
